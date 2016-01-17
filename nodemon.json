@@ -1,0 +1,11 @@
+{
+  "verbose": true,
+  "ignore": [
+    ".git/*",
+    "node_modules/*",
+    "dist/*",
+    "build/*",
+    "lib/*",
+    "npm-debug.log"
+  ]
+}
