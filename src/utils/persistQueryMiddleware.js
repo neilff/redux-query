@@ -2,7 +2,11 @@ import updateQueryString from './updateQueryString';
 import { INIT_PERSIST_QUERY } from '../index';
 import { createHistory } from 'history';
 
-const history = createHistory();
+let history = null;
+
+if (global.window) {
+  history = createHistory();
+}
 
 export default function persistQueryMiddleware(store, config) {
   return next => action => {
