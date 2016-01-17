@@ -22,6 +22,7 @@ export default function persistQueryMiddleware(store, config) {
       const query = updateQueryString(window.location.hash, key, encoder(state));
 
       if (pushState) {
+        console.warn('A custom pushState function is being used.');
         pushState(query);
       } else {
         history.pushState(null, query);

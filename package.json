@@ -4,7 +4,7 @@
   "description": "Persist redux state in the address bar.",
   "main": "lib/index.js",
   "scripts": {
-    "build": "node_modules/.bin/babel-node src --out-dir lib",
+    "build": "mkdir lib; node node_modules/.bin/babel src --out-dir lib",
     "prepublish": "rimraf lib && npm run build",
     "test": "npm run lint; node_modules/.bin/browserify -t 'babelify' -e test/*-test.js | node_modules/.bin/tape-run --browser=chrome",
     "test:watch": "nodemon --exec npm run test",
@@ -26,6 +26,8 @@
   },
   "homepage": "github.com/neilff/redux-query#readme",
   "devDependencies": {
+    "babel": "^5.5.8",
+    "babel-core": "^5.6.18",
     "babel-eslint": "^5.0.0-beta6",
     "babelify": "6.4.0",
     "browserify": "^12.0.1",

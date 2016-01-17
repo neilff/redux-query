@@ -1,6 +1,6 @@
 import invariant from 'invariant';
 import { encode, decode } from 'base-64';
-import parseHashString from './utils/parseHashString';
+import parseQueryString from './utils/parseQueryString';
 import persistQueryMiddleware from './utils/persistQueryMiddleware';
 
 export const INIT_PERSIST_QUERY = '@@reduxPersistQuery/INIT';
@@ -16,7 +16,6 @@ export default function persistQuery(options) {
     encoder: (str) => encode(JSON.stringify(str)),
     decoder: (str) => JSON.parse(decode(str)),
     slicer: (state) => state,
-    pushState: (query) => window.history.pushState(null, query),
     ...options,
   };
 
@@ -36,12 +35,7 @@ export default function persistQuery(options) {
     'persistQuery: The slicer property must be a function.'
   );
 
-  invariant(
-    config.pushState && typeof config.pushState === 'function',
-    'persistQuery: The pushState property must be a function.'
-  );
-
-  const parsedQuery = parseHashString(window.location.hash, config.key);
+  const parsedQuery = parseQueryString(window.location.search, config.key);
 
   let decodedInitialState = null;
 
